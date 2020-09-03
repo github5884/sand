@@ -27,15 +27,19 @@ Slack SDK for Javaを試しに使ってみるプロジェクト
 
 開発用ワークスペースのトークンを取得
 
-- Appを作成
--- https://api.slack.com/apps
--- [Create an App]ボタンを押下
--- App名と対象ワークスペースを指定し、[Create App]ボタンを押下
+### Appを作成
 
-- 認証関連の設定ページにアクセス
--- https://api.slack.com/apps/A019X2AQXV3/oauth?
+- https://api.slack.com/apps
+- [Create an App]ボタンを押下
+- App名と対象ワークスペースを指定し、[Create App]ボタンを押下
+
+### 認証関連の設定ページにアクセス
+
+- https://api.slack.com/apps/A019X2AQXV3/oauth?
 - "Scopes"セクションの"User Token Scopes"にて、[Add an OAuth Scope]ボタンを押下
--- Scope "chat:write"を選択
+- Scope "chat:write"を選択
+
+### AppをSlack上にインストール
 
 - Settings ＞ "Install App"を選択
 - [Install App to Workspace]ボタンを押下
