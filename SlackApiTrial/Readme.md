@@ -12,16 +12,18 @@ Slack SDK for Javaを試しに使ってみるプロジェクト
 
 - pom.xmlにライブラリ情報を追記
 
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	  ・・・
-	  <dependencies>
-	    <dependency>
-	      <groupId>com.slack.api</groupId>
-	      <artifactId>slack-api-client</artifactId>
-	      <version>1.1.3</version>
-	    </dependency>
-	  </dependencies>
-	</project>
+~~~
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  ・・・
+  <dependencies>
+    <dependency>
+      <groupId>com.slack.api</groupId>
+      <artifactId>slack-api-client</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+  </dependencies>
+</project>
+~~~
 
 ## Slackのトークンを取得
 
