@@ -35,11 +35,13 @@ public class SqliteAccess {
 	
 	/**
 	 * 抽出クエリ実行
-	 * @param query		クエリ
-	 * @return			抽出結果
+	 * @param query			クエリ
+	 * @param columns		カラム配列
+	 * @return				true=OK, false=NG
 	 */
-	public String[][] execSelectQuery(String query) {
-		if (connection == null) return null;
+	public String[][] execSelectQuery(String query, String[] columns) {
+		// 未接続の場合はクエリを実行しない
+		if(connection == null) return null;
 		
 		List<String[]> retList = new ArrayList<>();
 		
@@ -47,15 +49,17 @@ public class SqliteAccess {
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);
 			
+			// クエリ実行
 			ResultSet rs = statement.executeQuery(query);
 			
 			while (rs.next()) {
-				String[] resultLine = new String[2];
-				resultLine[0] = rs.getString("key");
-				resultLine[1] = rs.getString("value");
-				
+				String[] resultLine = new String[columns.length];
+				for (int i = 0; i < columns.length; i++) {
+					resultLine[i] = rs.getString(columns[i]);
+				}
 				retList.add(resultLine);
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +74,6 @@ public class SqliteAccess {
 		return ret;
 	}
 	
-	
 	public static void main(String[] args) {
 		SqliteAccess sa = new SqliteAccess();
 		
@@ -79,7 +82,7 @@ public class SqliteAccess {
 			return;
 		}
 		
-		String[][] result = sa.execSelectQuery("select * from info;");
+		String[][] result = sa.execSelectQuery("select * from info", new String[] {"key", "value"});
 		if (result != null) {
 			for (String[] resultLine : result) {
 				System.out.println(resultLine[0] + "," + resultLine[1]);
