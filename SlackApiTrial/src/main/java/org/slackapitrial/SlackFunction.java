@@ -21,11 +21,13 @@ public class SlackFunction {
 	 * メッセージ投稿を試す
 	 */
 	public void tryPostMessage() {
+		final String BR = System.getProperty("line.separator");
+		
 		// Slackインスタンスを生成
 		Slack slack = Slack.getInstance();
 		
 		// APIトークンを設定
-		String userToken = "xoxp-XXXXXXXXXXXXXXXX";
+		String userToken = "xoxb-XXXXXXXXXX";
 		
 		// APIメソッドクライアントを初期化
 		MethodsClient methods = slack.methods(userToken);
@@ -33,7 +35,7 @@ public class SlackFunction {
 		// APIリクエスト内容を構成
 		ChatPostMessageRequest request = ChatPostMessageRequest.builder()
 				.channel("work_start_end")
-				.text("メッセージを送信する。")
+				.text("これが1行目。" + BR + "次が2行目")
 				.build();
 		
 		// APIレスポンスを受け取る

@@ -38,6 +38,8 @@ Slack SDK for Javaを試しに使ってみるプロジェクト
 ### 認証関連の設定ページにアクセス
 
 - https://api.slack.com/apps/A019X2AQXV3/oauth?
+- "Scopes"セクションの"Bot Token Scopes"にて、[Add an OAuth Scope]ボタンを押下
+- Scope "chat:write"を選択
 - "Scopes"セクションの"User Token Scopes"にて、[Add an OAuth Scope]ボタンを押下
 - Scope "chat:write"を選択
 
@@ -49,9 +51,19 @@ Slack SDK for Javaを試しに使ってみるプロジェクト
 - [許可する]ボタンを押下
 - "OAuth Access Token"の表示内容をトークンとして控えておく
 
+### botユーザを作成
+
+- Bot作成ページを開く
+-- https://devfield.slack.com/apps/new/A0F7YS25R-bots
+-- ボットのユーザ名を入力
+-- [ボットインテグレーションを追加する]を押下
+-- [インテグレーションを保存]を押下
+
 
 # 参照ページ
 
 - 「APIのクライアントセットアップ」
 -- https://slack.dev/java-slack-sdk/guides/ja/web-api-client-setup
-
+- 「Simple Slack APIを使ってSlackへHello World!
+-- https://javazuki.com/articles/simple-slack-api-helloworld.html
+-- Botの作成方法
