@@ -26,7 +26,7 @@ public class RgbConvert {
                 int[] rgbNums = new int[3];
                 for (int i = 0; i < 3; i++) {
                     int offset = i * 2;
-                    rgbNums[i] = hex2decimal(hexCode.substring(offset, offset + 1)) * 10
+                    rgbNums[i] = hex2decimal(hexCode.substring(offset, offset + 1)) * 16
                                     + hex2decimal(hexCode.substring(offset + 1, offset + 2));
                 }
 
