@@ -6,9 +6,12 @@ GetNxtGeed
 
 # 実行確認環境
 - OS  
--- CentOS Linux release 7.5.1804 (Core)  
+
+      CentOS Linux release 7.5.1804 (Core)  
+
 - Python  
--- Python 3.6.8  
+
+      Python 3.6.8  
 
 # 実行前の準備
 
@@ -27,9 +30,9 @@ GetNxtGeed
 ## ChatworkのAPIトークンを取得
 - Chatworkにログイン  
 - 「サービス連携/API」画面を開く。  
--- Chatwork画面右上の自アカウントを選択し、表示されたメニューにて「サービス連携」を選択する。  
+Chatwork画面右上の自アカウントを選択し、表示されたメニューにて「サービス連携」を選択する。  
 - 「API Token」画面を開く  
--- 「サービス連携/API」画面左側メニューのAPI->API Tokenを選択  
+「サービス連携/API」画面左側メニューのAPI->API Tokenを選択  
 - Chatworkアカウントのパスワードを入力し、APIトークンを発行  
 
 ## Chatworkの投稿先のルームIDを取得
