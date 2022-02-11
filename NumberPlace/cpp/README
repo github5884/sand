@@ -1,0 +1,17 @@
+- - - - - - - - - - - - - - - -
+README: Number Place Program
+ last update: 2022.2.11
+- - - - - - - - - - - - - - - -
+
+(1) How to build
+
+Execute command below to compile npl.cpp
+
+$ make npl
+
+(2) How to execute
+
+Place "q.csv" at current directory
+
+Execute command below to execute npl
+$ ./npl
