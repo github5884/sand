@@ -83,7 +83,7 @@ int readCsvFile(int q[][NUMS_BLOCK]) {
 	ifstream ifs("./q.csv");
 	
 	// 行データ読み込み用バッファを準備
-	int buf_size = 18;
+	int buf_size = NUMS_BLOCK * 2;
 	char q_str[buf_size];
 	
 	// 問題CSVファイル読み込み失敗時処理
@@ -435,13 +435,13 @@ int main() {
 		q_cand = resetCandidate(q);
 				
 		// 候補数字を探索
-                q_cand = expoloreCandidate(q, q_cand);
+		q_cand = expoloreCandidate(q, q_cand);
 		
 		// 単独候補数字を正解値として確定
 		q_cand = confirmOnlyoneCandidate(q, q_cand);
 		
 		// 正解値候補リストセットをリセット
-                q_cand = resetCandidate(q);
+		q_cand = resetCandidate(q);
 		
 		// ループ回数をカウントアップ
 		roop_count++;
