@@ -1,16 +1,22 @@
+"""get Nikkei xTECH RSS feed
+
+getnxtfeed.py
+"""
+
 # coding: utf-8
 import json
 import time
 import requests
 import feedparser
 
-# get Nikkei xTECH RSS feed
 
 # define : RSS url
 nikkeiXtechRssUrl = 'https://tech.nikkeibp.co.jp/rss/xtech-it.rdf'
 
-# main method
 def main():
+	"""main method
+
+	"""
 	
 	# get feed info
 	feedInfoList = getFeedInfo(nikkeiXtechRssUrl)
@@ -20,8 +26,16 @@ def main():
 		postMessage(feedInfo)
 
 
-# get RSS feed
 def getFeedInfo(rssUrl):
+	"""get RSS feed
+
+	Args:
+		rssUrl (string) : 1st argument
+
+	Returns:
+		string: Rss feed
+
+	"""
 
 	# get & parse feed
 	resData = feedparser.parse(rssUrl)
@@ -39,6 +53,12 @@ def getFeedInfo(rssUrl):
 
 # post chatwork message
 def postMessage(postMsg):
+	"""post chatowrk message
+
+	Args:
+		postMsg (string) : 1st argument
+
+	"""
 	
 	# chatwork api parameters
 	apiToken = '*************'

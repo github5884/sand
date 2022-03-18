@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getnxtfeed_tokend &#8212; GetNxtFeed 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for getnxtfeed_tokend</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding: utf-8</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">feedparser</span>
+
+<span class="c1"># get Nikkei xTECH RSS deed</span>
+
+<span class="c1"># define : RSS url</span>
+<span class="n">nikkeiXtechRssUrl</span> <span class="o">=</span> <span class="s1">&#39;https://tech.nikkeibp.co.jp/rss/xtech-it.rdf&#39;</span>
+
+<span class="c1"># main method</span>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../getnxtfeed_tokend.html#getnxtfeed_tokend.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+	
+	<span class="c1"># get feed info</span>
+	<span class="n">feedInfoList</span> <span class="o">=</span> <span class="n">getFeedInfo</span><span class="p">(</span><span class="n">nikkeiXtechRssUrl</span><span class="p">)</span>
+	
+	<span class="c1"># post to chatwork</span>
+	<span class="k">for</span> <span class="n">feedInfo</span> <span class="ow">in</span> <span class="n">feedInfoList</span><span class="p">:</span>
+		<span class="n">postMessage</span><span class="p">(</span><span class="n">feedInfo</span><span class="p">)</span></div>
+
+
+<span class="c1"># get RSS feed</span>
+<div class="viewcode-block" id="getFeedInfo"><a class="viewcode-back" href="../getnxtfeed_tokend.html#getnxtfeed_tokend.getFeedInfo">[docs]</a><span class="k">def</span> <span class="nf">getFeedInfo</span><span class="p">(</span><span class="n">rssUrl</span><span class="p">):</span>
+
+	<span class="c1"># get &amp; parse feed</span>
+	<span class="n">resData</span> <span class="o">=</span> <span class="n">feedparser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">rssUrl</span><span class="p">)</span>
+
+	<span class="n">feedInfoList</span> <span class="o">=</span> <span class="p">[]</span>
+
+	<span class="n">feedNumber</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">resData</span><span class="o">.</span><span class="n">entries</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>
+		<span class="n">feedNumber</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="n">feedInfoList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">feedNumber</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;] &#39;</span> <span class="o">+</span> <span class="n">entry</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">entry</span><span class="o">.</span><span class="n">link</span><span class="p">)</span>
+	
+	<span class="k">return</span> <span class="n">feedInfoList</span></div>
+
+
+<span class="c1"># post chatwork message</span>
+<div class="viewcode-block" id="postMessage"><a class="viewcode-back" href="../getnxtfeed_tokend.html#getnxtfeed_tokend.postMessage">[docs]</a><span class="k">def</span> <span class="nf">postMessage</span><span class="p">(</span><span class="n">postMsg</span><span class="p">):</span>
+	
+	<span class="c1"># chatwork api parameters</span>
+	<span class="n">apiToken</span> <span class="o">=</span> <span class="s1">&#39;58d1b5b8a2567e1e7923a8789af1087d&#39;</span>
+	<span class="n">roomId</span> <span class="o">=</span> <span class="s1">&#39;244393210&#39;</span>
+	
+	<span class="c1"># post destination url</span>
+	<span class="n">postUrl</span> <span class="o">=</span> <span class="s1">&#39;https://api.chatwork.com/v2/rooms/&#39;</span> <span class="o">+</span> <span class="n">roomId</span> <span class="o">+</span> <span class="s1">&#39;/messages&#39;</span>
+	
+	<span class="c1"># post header info</span>
+	<span class="n">postHeader</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;X-ChatWorkToken&#39;</span> <span class="p">:</span> <span class="n">apiToken</span>
+	<span class="p">}</span>
+	
+	<span class="c1"># post data</span>
+	<span class="n">postData</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">postMsg</span>
+	<span class="p">}</span>
+
+	<span class="c1"># wait 1 second</span>
+	<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+	<span class="c1"># post message</span>
+	<span class="n">httpRes</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">postUrl</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">postHeader</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">postData</span><span class="p">)</span>
+	
+	<span class="nb">print</span><span class="p">(</span><span class="n">httpRes</span><span class="o">.</span><span class="n">content</span><span class="p">)</span></div>
+	
+<span class="c1"># entry point</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+	<span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">GetNxtFeed</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getnxtfeed.html">getnxtfeed module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getnxtfeed_tokend.html">getnxtfeed_tokend module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, github5884.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
