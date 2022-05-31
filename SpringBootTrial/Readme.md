@@ -22,6 +22,11 @@ Spring Bootを用いたWebアプリケーションを試しに作っていくプ
 * Language 
   * Java
 
+# ブラウザからアクセス時のURL
+
+* サンプルTOP画面
+  * http://xxx.xxx.xxx.xxx:8080/sampletop
+
 # 参考サイト
 Spring Boot＋Thymeleafで”Hello World”を作成する  
 https://medium-company.com/spring-boot-thymeleaf/
