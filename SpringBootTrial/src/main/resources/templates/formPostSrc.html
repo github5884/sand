@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>form post source page</title>
+		
+		<!-- import jQuery -->
+		<script type="text/javascript" th:src="@{/js/external/jquery-3.6.0.min.js}"></script>
+		<!-- import Semantic UI -->
+		<link type="text/css" rel="stylesheet" th:href="@{/css/external/semantic.min.css}">
+		<script type="text/javascript" th:src="@{/js/external/semantic.min.js}"></script>
+		
+		<!-- original css -->
+		<link type="text/css" rel="stylesheet" th:href="@{/css/common.css}">
+	</head>
+	<body class="base">
+		<div class="ui text container">
+			<h1 class="ui header">以下の2項目の入力内容を別ページに送信</h1>
+			<form class="ui form" th:action="@{/formpostdest}" method="post">
+				<div class="ui stackable two column grid">
+					<div class="row">
+						<div class="column">
+							<label>入力項目1</label>
+						</div>
+						<div class="column">
+							<div class="ui input">
+								<input type="text" name="item1" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="column">
+							<label>入力項目2</label>
+						</div>
+						<div class="column">
+							<div class="ui input">
+								<input type="text" name="item2" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="ui button" type="submit">submit</button>
+			</form>
+		</div>
+		
+	</body>
+</html>
